@@ -37,8 +37,8 @@ const getValues = (
                     <td>
                         <CopyIcon text={value} />
                     </td>
-                    <td>{key}</td>
-                    <td>{value}</td>
+                    <td className={`${styles.tdNewLine}`}>{key}</td>
+                    <td className={`${styles.tdNewLine}`}>{value}</td>
                 </tr>
             ));
     }
@@ -52,8 +52,8 @@ const getValues = (
                     <td>
                         <CopyIcon text={value} />
                     </td>
-                    <td>{key}</td>
-                    <td>{value}</td>
+                    <td className={`${styles.tdNewLine}`}>{key}</td>
+                    <td className={`${styles.tdNewLine}`}>{value}</td>
                 </tr>
             ));
     }
@@ -65,8 +65,8 @@ const getValues = (
                 <td>
                     <CopyIcon text={value} />
                 </td>
-                <td>{key}</td>
-                <td>{value}</td>
+                <td className={`${styles.tdNewLine}`}>{key}</td>
+                <td className={`${styles.tdNewLine}`}>{value}</td>
             </tr>
         ));
 };
