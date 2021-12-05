@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable indent */
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import useTabName from '../../hooks/PagesNameGetter.hooks';
 import useStorageValues from '../../hooks/StorageGetter.hooks';
@@ -76,8 +76,15 @@ const ValuesTab: React.FC = () => {
     const windowPagesName: PageType[] = useTabName();
     const [selectedOption, dispatch] = useReducer(reducer, {
         type: '1',
-        tabId: windowPagesName[0]?.id || 0,
+        tabId: 0,
     });
+
+    useEffect(() => {
+        chrome.tabs.query({ active: true }, (tabs) => {
+            dispatch({ payload: tabs[0].id, type: TypeSelect.TAB });
+        });
+    }, []);
+
     return (
         <div className="container-fluid mb-2">
             <Row className="mb-2">
@@ -100,7 +107,7 @@ const ValuesTab: React.FC = () => {
                 <Col xs={6} xl={6} lg={6} sm={6} md={6}>
                     <select
                         className="w-100"
-                        value={selectedOption.tab}
+                        value={selectedOption.tabId}
                         onChange={(e) =>
                             dispatch({
                                 type: TypeSelect.TAB,
