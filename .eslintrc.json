@@ -24,7 +24,7 @@
     ],
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "no-undef": "off",
     "react/prop-types": "off",
     "react/function-component-definition": "off",
@@ -42,7 +42,8 @@
     "@typescript-eslint/no-shadow": ["error"],
     "object-curly-newline": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "no-extra-boolean-cast": "off"
   },
   "settings": {
     "import/resolver": {
