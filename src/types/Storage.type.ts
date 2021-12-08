@@ -8,3 +8,13 @@ export interface StoreStorageType {
   local: StorageType[];
   session: StorageType[];
 }
+
+export type StorageValueType = Omit<StorageType, 'tabId' | 'key'> & {
+  storeKey: string;
+};
+
+export interface StorageLengthType {
+  [key: string]: any;
+  session: number;
+  local: number;
+}

@@ -1,8 +1,7 @@
-.valuesTable {
-    table-layout: fixed;
-    width: 100%;
+.pageContainer {
+  height: 100%;
 }
 
-.tdNewLine {
-    word-wrap: break-word;
+.cardContainer {
+  overflow-y: scroll;
 }
