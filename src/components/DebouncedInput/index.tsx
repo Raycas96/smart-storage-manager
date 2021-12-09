@@ -5,6 +5,7 @@ const DebouncedInput: React.FC<DebouncedInputType> = ({
   action,
   initialValue = '',
   delay = 500,
+  placeholder = '',
 }) => {
   const [inputValue, setInputValue] = useState(initialValue);
 
@@ -27,6 +28,8 @@ const DebouncedInput: React.FC<DebouncedInputType> = ({
       className="form-control form-control-sm w-100"
       value={inputValue}
       onChange={(event) => handleChange(event)}
+      type="text"
+      placeholder={placeholder}
     />
   );
 };

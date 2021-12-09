@@ -96,6 +96,7 @@ const ValuesTab: React.FC = () => {
         <Col xs={9} xl={9} lg={9} sm={9} md={9}>
           <DebouncedInput
             action={(payload) => dispatch({ type: TypeSelect.SEARCH, payload })}
+            placeholder="Search Key..."
           />
         </Col>
       </Row>

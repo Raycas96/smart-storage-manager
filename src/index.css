@@ -46,7 +46,8 @@ span {
 }
 
 input[type='text'],
-textarea {
+textarea,
+select {
   background-color: rgb(36, 36, 36) !important;
   color: #e2fbf9 !important;
 }
