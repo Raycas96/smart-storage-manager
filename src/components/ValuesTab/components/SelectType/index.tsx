@@ -1,6 +1,7 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 import { DispatchType } from '../../../../types/DispatchType';
+import { StorageSelectEnum } from '../../enums/StorageSelect.enum';
 import { TypeSelect } from '../../enums/TypeSelect.enum';
 
 const SelectType: React.FC<{
@@ -23,9 +24,9 @@ const SelectType: React.FC<{
             })
           }
         >
-          <MenuItem value="1">Both</MenuItem>
-          <MenuItem value="2">Local Storage</MenuItem>
-          <MenuItem value="3">Session Storage</MenuItem>
+          <MenuItem value={StorageSelectEnum.ALL}>All</MenuItem>
+          <MenuItem value={StorageSelectEnum.LOCAL}>Local Storage</MenuItem>
+          <MenuItem value={StorageSelectEnum.SESSION}>Session Storage</MenuItem>
         </Select>
       </FormControl>
     </Grid>

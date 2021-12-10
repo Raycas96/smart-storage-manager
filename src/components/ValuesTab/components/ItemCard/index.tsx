@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Typography, Box } from '@mui/material';
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { StorageValueType } from '../../../../types/Storage.type';
 import CopyIcon from '../CopyIcon';
@@ -9,6 +9,7 @@ const itemCard: React.FC<StorageValueType> = ({
   storeKey: key,
   value,
   tabId,
+  storage,
 }) => (
   <Card className={styles.itemCard}>
     <CardContent className={styles.itemCard}>
@@ -64,6 +65,29 @@ const itemCard: React.FC<StorageValueType> = ({
             >
               <Typography noWrap sx={{ fontSize: 'small' }}>
                 {value}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={6} xl={6} lg={6} sm={6} md={6}>
+              <hr className="pinkColor" />
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={2} xl={2} lg={2} sm={2} md={2}>
+              <span>Source:</span>
+            </Grid>
+            <Grid
+              item
+              xs={10}
+              xl={10}
+              lg={10}
+              sm={10}
+              md={10}
+              className={`${styles.itemValue}`}
+            >
+              <Typography noWrap sx={{ fontSize: 'small' }}>
+                {storage}
               </Typography>
             </Grid>
           </Grid>

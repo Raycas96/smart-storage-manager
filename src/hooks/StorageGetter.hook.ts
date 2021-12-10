@@ -1,15 +1,12 @@
 import React from 'react';
-import { StorageType, StoreStorageType } from '../types/Storage.type';
+import { StorageType } from '../types/Storage.type';
 
 /** Script injected inside the background page
  * it takes all the values from local or session storage
  * based on the args
  */
 const accesWindowStorage = (id: number) => {
-  const storageValues: StoreStorageType = {
-    local: [] as StorageType[],
-    session: [] as StorageType[],
-  } as StoreStorageType;
+  const storageValues: StorageType[] = [];
 
   const localKeys = Object.keys(localStorage);
   const sessionKeys = Object.keys(sessionStorage);
@@ -18,20 +15,22 @@ const accesWindowStorage = (id: number) => {
   let sessionStorageLength = sessionKeys.length;
 
   while (localStorageLength) {
-    storageValues.local.push({
+    storageValues.push({
       key: localKeys[localStorageLength - 1],
       value: localStorage.getItem(localKeys[localStorageLength - 1]) || '',
-      tabId: id,
+      tabId: id.toString(),
+      storage: 'Local Storage',
     });
     localStorageLength -= 1;
   }
 
   while (sessionStorageLength) {
-    storageValues.session.push({
+    storageValues.push({
       key: sessionKeys[sessionStorageLength - 1],
       value:
         sessionStorage.getItem(sessionKeys[sessionStorageLength - 1]) || '',
-      tabId: id,
+      tabId: id.toString(),
+      storage: 'Session Storage',
     });
     sessionStorageLength -= 1;
   }
@@ -39,12 +38,9 @@ const accesWindowStorage = (id: number) => {
 };
 
 const getStorageValues = (
-  setStorageValue: (storageValue: StoreStorageType) => void
+  setStorageValue: (storageValue: StorageType[]) => void
 ): void => {
-  const storageValues: StoreStorageType = {
-    local: [],
-    session: [],
-  } as StoreStorageType;
+  let storageValues: StorageType[] = [];
   // Get all the tabs
   chrome.tabs.query({}, (tabs) => {
     let counter = 0;
@@ -56,12 +52,8 @@ const getStorageValues = (
           args: [tab.id || 0],
         },
         (res) => {
-          storageValues.local = storageValues.local.concat(
-            res && res.length ? res[0].result?.local : []
-          );
-
-          storageValues.session = storageValues.session.concat(
-            res && res.length ? res[0].result?.session : []
+          storageValues = storageValues.concat(
+            res && res.length && res[0].result ? res[0].result : []
           );
 
           counter += 1;
@@ -75,10 +67,7 @@ const getStorageValues = (
 };
 
 const useStorageValues = () => {
-  const [storageValue, setStorageValue] = React.useState<StoreStorageType>({
-    local: [],
-    session: [],
-  } as StoreStorageType);
+  const [storageValue, setStorageValue] = React.useState<StorageType[]>([]);
 
   React.useEffect(() => getStorageValues(setStorageValue), []);
 

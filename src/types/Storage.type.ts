@@ -1,12 +1,8 @@
 export interface StorageType {
   key: string;
   value: string;
-  tabId: number;
-}
-
-export interface StoreStorageType {
-  local: StorageType[];
-  session: StorageType[];
+  tabId: string;
+  storage: 'Local Storage' | 'Session Storage' | 'Cookies';
 }
 
 export type StorageValueType = Omit<StorageType, 'key'> & {

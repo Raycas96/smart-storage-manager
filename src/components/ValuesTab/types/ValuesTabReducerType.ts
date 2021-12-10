@@ -1,5 +1,5 @@
 export interface ValuesTabReducerType {
   type: string;
-  tabId: number;
+  tabId: string;
   searchText: string;
 }

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import AskModal from '../../../Modals/AskModal';
 
 interface DeleteIconType {
-  tabId: number;
+  tabId: string;
   keyValue: string;
 }
 

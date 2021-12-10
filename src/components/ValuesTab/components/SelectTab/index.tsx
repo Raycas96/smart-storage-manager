@@ -5,8 +5,8 @@ import { PageType } from '../../../../types/PageType';
 import { TypeSelect } from '../../enums/TypeSelect.enum';
 
 const SelectTab: React.FC<{
-  dispatch: (payload: DispatchType<string | number>) => void;
-  value: number;
+  dispatch: (payload: DispatchType<string>) => void;
+  value: string;
   windowPagesName: PageType[];
 }> = ({ dispatch, value, windowPagesName }) => (
   <Grid container className="mb-2 text-left">
@@ -21,7 +21,7 @@ const SelectTab: React.FC<{
           onChange={(e) =>
             dispatch({
               type: TypeSelect.TAB,
-              payload: e.target.value as number,
+              payload: e.target.value.toString(),
             })
           }
           className="w-100"
