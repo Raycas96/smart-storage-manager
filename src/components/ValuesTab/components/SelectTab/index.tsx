@@ -1,37 +1,40 @@
+import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { DispatchType } from '../../../../types/DispatchType';
 import { PageType } from '../../../../types/PageType';
 import { TypeSelect } from '../../enums/TypeSelect.enum';
 
 const SelectTab: React.FC<{
-  dispatch: (payload: DispatchType<string>) => void;
-  initialValue: string;
+  dispatch: (payload: DispatchType<string | number>) => void;
+  value: number;
   windowPagesName: PageType[];
-}> = ({ dispatch, initialValue, windowPagesName }) => (
-  <Row className="mb-2 text-left">
-    <Col xs={3} xl={3} lg={3} sm={3} md={3}>
-      <span>Tab: </span>
-    </Col>
-    <Col xs={9} xl={9} lg={9} sm={9} md={9}>
-      <select
-        className="w-100 form-select form-select-sm"
-        value={initialValue}
-        onChange={(e) =>
-          dispatch({
-            type: TypeSelect.TAB,
-            payload: e.target.value,
-          })
-        }
-      >
-        {windowPagesName.map(({ name, id }) => (
-          <option value={id} key={id}>
-            {name}
-          </option>
-        ))}
-      </select>
-    </Col>
-  </Row>
+}> = ({ dispatch, value, windowPagesName }) => (
+  <Grid container className="mb-2 text-left">
+    <Grid item xs={12} xl={12} lg={12} sm={12} md={12}>
+      <FormControl fullWidth>
+        <InputLabel id="tab-label">Tab</InputLabel>
+        <Select
+          size="small"
+          labelId="Tab"
+          value={value}
+          label="Tab"
+          onChange={(e) =>
+            dispatch({
+              type: TypeSelect.TAB,
+              payload: e.target.value as number,
+            })
+          }
+          className="w-100"
+        >
+          {windowPagesName.map(({ name, id }) => (
+            <MenuItem value={id} key={id}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Grid>
+  </Grid>
 );
 
 export default SelectTab;

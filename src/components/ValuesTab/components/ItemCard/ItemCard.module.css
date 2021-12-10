@@ -1,6 +1,6 @@
 .iconsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   height: 20px;
 }
 

@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { DebouncedInputType } from '../../types/DebouncedInputType';
 
@@ -24,12 +25,17 @@ const DebouncedInput: React.FC<DebouncedInputType> = ({
   };
 
   return (
-    <input
-      className="form-control form-control-sm w-100"
+    <TextField
+      size="small"
+      label="Search Key"
+      defaultValue="Hello World"
       value={inputValue}
       onChange={(event) => handleChange(event)}
       type="text"
       placeholder={placeholder}
+      InputLabelProps={{
+        shrink: true,
+      }}
     />
   );
 };

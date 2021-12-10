@@ -9,7 +9,7 @@ export interface StoreStorageType {
   session: StorageType[];
 }
 
-export type StorageValueType = Omit<StorageType, 'tabId' | 'key'> & {
+export type StorageValueType = Omit<StorageType, 'key'> & {
   storeKey: string;
 };
 

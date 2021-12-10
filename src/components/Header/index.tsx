@@ -1,23 +1,27 @@
-import { Col, Row } from 'react-bootstrap';
+import { Grid } from '@mui/material';
 import React from 'react';
-import TabCounter from '../TabCounter';
-import StorageCounter from '../StorageItemCounter';
 import { StorageEnum } from '../../enums/storage.enum';
+import StorageCounter from '../StorageItemCounter';
+import TabCounter from '../TabCounter';
 
 const Header: React.FC = () => (
-  <div className="container-fluid mb-2">
-    <Row>
-      <Col xs={4} xl={4} lg={4} sm={4} md={4} className="text-right">
-        <TabCounter />
-      </Col>
-      <Col xs={4} xl={4} lg={4} sm={4} md={4}>
-        <StorageCounter type={StorageEnum.LOCAL} />
-      </Col>
-      <Col xs={4} xl={4} lg={4} sm={4} md={4}>
-        <StorageCounter type={StorageEnum.SESSION} />
-      </Col>
-    </Row>
-  </div>
+  <Grid
+    container
+    sx={{
+      mb: 2,
+    }}
+    spacing={1}
+  >
+    <Grid item xs={4} xl={4} lg={4} sm={4} md={4}>
+      <TabCounter />
+    </Grid>
+    <Grid item xs={4} xl={4} lg={4} sm={4} md={4}>
+      <StorageCounter type={StorageEnum.LOCAL} />
+    </Grid>
+    <Grid item xs={4} xl={4} lg={4} sm={4} md={4}>
+      <StorageCounter type={StorageEnum.SESSION} />
+    </Grid>
+  </Grid>
 );
 
 export default Header;
