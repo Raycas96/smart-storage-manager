@@ -5,13 +5,15 @@ import useStorageItemCounter from '../../hooks/StorageItemCounter.hook';
 
 const StorageItemCounter: React.FC<{ type: string }> = ({ type }) => {
   const storageCount = useStorageItemCounter();
+  const text = `${
+    type === StorageEnum.LOCAL ? 'Local' : 'Session'
+  } Storage Total Items: ${
+    type === StorageEnum.LOCAL ? storageCount.local : storageCount.session
+  }`;
   return (
     <Chip
       size="small"
-      label={`${
-        type === StorageEnum.LOCAL ? 'Local' : 'Session'
-      } Storage Total Items:
-      ${storageCount[type]}`}
+      label={text}
       color="success"
       sx={{ width: '100%', fontSize: 'x-small' }}
     />
