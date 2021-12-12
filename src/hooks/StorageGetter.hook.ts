@@ -19,7 +19,7 @@ const accesWindowStorage = (id: number) => {
       key: localKeys[localStorageLength - 1],
       value: localStorage.getItem(localKeys[localStorageLength - 1]) || '',
       tabId: id.toString(),
-      storage: 'Local Storage',
+      storage: 'local',
     });
     localStorageLength -= 1;
   }
@@ -30,7 +30,7 @@ const accesWindowStorage = (id: number) => {
       value:
         sessionStorage.getItem(sessionKeys[sessionStorageLength - 1]) || '',
       tabId: id.toString(),
-      storage: 'Session Storage',
+      storage: 'session',
     });
     sessionStorageLength -= 1;
   }
@@ -38,38 +38,31 @@ const accesWindowStorage = (id: number) => {
 };
 
 const getStorageValues = (
-  setStorageValue: (storageValue: StorageType[]) => void
+  setStorageValue: (storageValue: StorageType[]) => void,
+  tabId: string
 ): void => {
   let storageValues: StorageType[] = [];
-  // Get all the tabs
-  chrome.tabs.query({}, (tabs) => {
-    let counter = 0;
-    tabs.forEach((tab) => {
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: tab.id || 0 },
-          func: accesWindowStorage,
-          args: [tab.id || 0],
-        },
-        (res) => {
-          storageValues = storageValues.concat(
-            res && res.length && res[0].result ? res[0].result : []
-          );
-
-          counter += 1;
-          if (counter === tabs.length - 1) {
-            setStorageValue(storageValues);
-          }
-        }
-      );
-    });
-  });
+  if (parseInt(tabId, 10) > 0) {
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: parseInt(tabId, 10) || 0 },
+        func: accesWindowStorage,
+        args: [parseInt(tabId, 10) || 0],
+      },
+      (res) => {
+        storageValues = storageValues.concat(
+          res && res.length && res[0].result ? res[0].result : []
+        );
+        setStorageValue(storageValues);
+      }
+    );
+  }
 };
 
-const useStorageValues = () => {
+const useStorageValues = (tabId: string) => {
   const [storageValue, setStorageValue] = React.useState<StorageType[]>([]);
 
-  React.useEffect(() => getStorageValues(setStorageValue), []);
+  React.useEffect(() => getStorageValues(setStorageValue, tabId), [tabId]);
 
   return storageValue;
 };

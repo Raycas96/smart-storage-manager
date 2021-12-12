@@ -8,7 +8,7 @@ const SelectType: React.FC<{
   dispatch: (payload: DispatchType<string>) => void;
   initialValue: string;
 }> = ({ dispatch, initialValue }) => (
-  <Grid container className="mb-2 text-left">
+  <Grid container>
     <Grid item xs={12} xl={12} lg={12} sm={12} md={12}>
       <FormControl fullWidth>
         <InputLabel id="select-label">Storage Source</InputLabel>

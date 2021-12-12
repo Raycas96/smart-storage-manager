@@ -36,6 +36,7 @@ const DebouncedInput: React.FC<DebouncedInputType> = ({
       InputLabelProps={{
         shrink: true,
       }}
+      sx={{ width: '100%' }}
     />
   );
 };

@@ -2,7 +2,7 @@ export interface StorageType {
   key: string;
   value: string;
   tabId: string;
-  storage: 'Local Storage' | 'Session Storage' | 'Cookies';
+  storage: storage;
 }
 
 export type StorageValueType = Omit<StorageType, 'key'> & {
@@ -14,3 +14,5 @@ export interface StorageLengthType {
   session: number;
   local: number;
 }
+
+export type storage = 'local' | 'session' | 'cookies';

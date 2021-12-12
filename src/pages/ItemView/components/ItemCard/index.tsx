@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { StorageValueType } from '../../../../types/Storage.type';
+import { getStorageDescription } from '../../../../utils/utility';
 import CopyIcon from '../CopyIcon';
 import DeleteIcon from '../DeleteIcon';
 import styles from './ItemCard.module.css';
@@ -26,7 +27,7 @@ const itemCard: React.FC<StorageValueType> = ({
           <Box sx={{ mb: 1 }}>
             <CopyIcon text={value} />
           </Box>
-          <DeleteIcon tabId={tabId} keyValue={key} />
+          <DeleteIcon tabId={tabId} keyValue={key} storageType={storage} />
         </Grid>
         <Grid item xs={11} xl={11} lg={11} sm={11} md={11}>
           <Grid container>
@@ -87,7 +88,7 @@ const itemCard: React.FC<StorageValueType> = ({
               className={`${styles.itemValue}`}
             >
               <Typography noWrap sx={{ fontSize: 'small' }}>
-                {storage}
+                {getStorageDescription(storage)}
               </Typography>
             </Grid>
           </Grid>

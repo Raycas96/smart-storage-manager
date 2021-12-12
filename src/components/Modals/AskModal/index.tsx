@@ -39,10 +39,12 @@ const AskModal: React.FC<AskModalType> = ({ show, text, action, setShow }) => {
             textAlign: 'center',
           }}
         >
-          <Typography id="transition-modal-title" variant="h6" component="h2">
-            {text}
-          </Typography>
-          <Stack spacing={2} direction="row" sx={{ justifyContent: 'center' }}>
+          <Typography sx={{ fontSize: 'medium' }}>{text}</Typography>
+          <Stack
+            spacing={2}
+            direction="row"
+            sx={{ justifyContent: 'center', mt: 2 }}
+          >
             <Button
               size="small"
               sx={{ backgroundColor: '#e2fbf9', color: 'black' }}

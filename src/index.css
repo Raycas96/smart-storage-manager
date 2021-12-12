@@ -5,11 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 600px;
-  height: 400px;
   color: #e2fbf9;
   background-color: #333333;
   font-size: small;
+  border: 3px solid #ffff;
+  color: #eddcff;
+  margin: 5px;
+  padding: 10px;
+  height: 100%;
+}
+
+html {
+  width: 600px;
+  height: 500px;
+}
+
+#root {
+  height: 100%;
 }
 
 code {
@@ -24,10 +36,6 @@ code {
 
 .icon:hover {
   text-decoration: underline;
-}
-
-#root {
-  height: 100%;
 }
 
 .pinkColor {

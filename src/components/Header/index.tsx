@@ -5,13 +5,7 @@ import StorageCounter from '../StorageItemCounter';
 import TabCounter from '../TabCounter';
 
 const Header: React.FC = () => (
-  <Grid
-    container
-    sx={{
-      mb: 2,
-    }}
-    spacing={1}
-  >
+  <Grid container spacing={1}>
     <Grid item xs={4} xl={4} lg={4} sm={4} md={4}>
       <TabCounter />
     </Grid>

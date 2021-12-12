@@ -1,20 +1,18 @@
-import { Grid } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Box, Grid } from '@mui/material';
 import React, { useEffect, useReducer } from 'react';
+import DebouncedInput from '../../components/DebouncedInput';
 import { StorageEnum } from '../../enums/storage.enum';
 import useTabName from '../../hooks/PagesNameGetter.hook';
 import useStorageValues from '../../hooks/StorageGetter.hook';
 import { DispatchType } from '../../types/DispatchType';
 import { PageType } from '../../types/PageType';
 import { StorageType } from '../../types/Storage.type';
-import DebouncedInput from '../DebouncedInput';
 import ItemCard from './components/ItemCard';
 import TabSelect from './components/SelectTab';
 import SelectType from './components/SelectType';
 import { StorageSelectEnum } from './enums/StorageSelect.enum';
 import { TypeSelect } from './enums/TypeSelect.enum';
 import { ValuesTabReducerType } from './types/ValuesTabReducerType';
-import styles from './ValuesTab.module.css';
 
 const reducer = (
   state: ValuesTabReducerType,
@@ -82,14 +80,14 @@ const getValues = (
   return [];
 };
 
-const ValuesTab: React.FC = () => {
-  const storageValue: StorageType[] = useStorageValues();
-  const windowPagesName: PageType[] = useTabName();
+const ItemView: React.FC = () => {
   const [selectedOption, dispatch] = useReducer(reducer, {
     type: StorageSelectEnum.LOCAL,
     tabId: '0',
     searchText: '',
   });
+  const windowPagesName: PageType[] = useTabName();
+  const storageValue: StorageType[] = useStorageValues(selectedOption.tabId);
 
   useEffect(() => {
     chrome.tabs.query({ active: true }, (tabs) => {
@@ -103,12 +101,12 @@ const ValuesTab: React.FC = () => {
   const values: StorageType[] = getValues(selectedOption, storageValue);
 
   return (
-    <Box className={styles.pageContainer} sx={{ mt: 3, pb: 2 }}>
+    <Box sx={{ height: '100%' }}>
       <Grid container spacing={1}>
-        <Grid item xs={6} xl={6} lg={6} sm={6} md={6}>
+        <Grid item xs={6} xl={6} lg={6} sm={6} md={6} sx={{ mt: 2 }}>
           <SelectType dispatch={dispatch} initialValue={selectedOption.type} />
         </Grid>
-        <Grid item xs={6} xl={6} lg={6} sm={6} md={6}>
+        <Grid item xs={6} xl={6} lg={6} sm={6} md={6} sx={{ mt: 2 }}>
           <TabSelect
             windowPagesName={windowPagesName}
             value={selectedOption.tabId}
@@ -125,7 +123,7 @@ const ValuesTab: React.FC = () => {
         </Grid>
       </Grid>
       {!!values.length ? (
-        <div className={`${styles.cardContainer}`}>
+        <Box sx={{ overflowY: 'scroll', height: '70%' }}>
           {values.map(({ key, value, tabId, storage }) => (
             <ItemCard
               key={key}
@@ -135,7 +133,7 @@ const ValuesTab: React.FC = () => {
               storage={storage}
             />
           ))}
-        </div>
+        </Box>
       ) : (
         <Grid container>
           <Grid item sx={{ textAlign: 'center', width: '100%' }}>
@@ -147,4 +145,4 @@ const ValuesTab: React.FC = () => {
   );
 };
 
-export default ValuesTab;
+export default ItemView;
