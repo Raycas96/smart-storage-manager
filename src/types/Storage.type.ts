@@ -7,6 +7,7 @@ export interface StorageType {
 
 export type StorageValueType = Omit<StorageType, 'key'> & {
   storeKey: string;
+  setStorageValue: (storage: StorageType[]) => void;
 };
 
 export interface StorageLengthType {
