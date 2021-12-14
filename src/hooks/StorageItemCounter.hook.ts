@@ -54,7 +54,15 @@ const useStorageItemCounter = () => {
       session: 0,
     });
 
-  React.useEffect(() => getStorageLengthValues(setStorageLengthValue), []);
+  React.useEffect(() => {
+    window.addEventListener('deleteItem', () =>
+      getStorageLengthValues(setStorageLengthValue));
+
+    getStorageLengthValues(setStorageLengthValue);
+
+    return window.removeEventListener('deleteItem', () =>
+      getStorageLengthValues(setStorageLengthValue));
+  }, []);
 
   return storageLengthValue;
 };

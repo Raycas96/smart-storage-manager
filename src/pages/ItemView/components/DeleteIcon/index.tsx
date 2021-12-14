@@ -11,6 +11,7 @@ interface DeleteIconType {
   storageType: storage;
   setStorageValue: (storage: StorageType[]) => void;
 }
+const deleteEvent = new Event('deleteItem');
 
 const deleteItem = (
   tabId: string,
@@ -30,7 +31,10 @@ const deleteItem = (
       },
       args: [storageType, key],
     },
-    () => getStorageValues(tabId, setStorageValue)
+    () => {
+      getStorageValues(tabId, setStorageValue);
+      window.dispatchEvent(deleteEvent);
+    }
   );
 };
 
