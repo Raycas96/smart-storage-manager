@@ -11,7 +11,6 @@ const itemCard: React.FC<StorageValueType> = ({
   value,
   tabId,
   storage,
-  setStorageValue,
 }) => (
   <Card className={styles.itemCard}>
     <CardContent className={styles.itemCard}>
@@ -28,12 +27,7 @@ const itemCard: React.FC<StorageValueType> = ({
           <Box sx={{ mb: 1 }}>
             <CopyIcon text={value} />
           </Box>
-          <DeleteIcon
-            tabId={tabId}
-            keyValue={key}
-            storageType={storage}
-            setStorageValue={setStorageValue}
-          />
+          <DeleteIcon tabId={tabId} keyValue={key} storageType={storage} />
         </Grid>
         <Grid item xs={11} xl={11} lg={11} sm={11} md={11}>
           <Grid container>

@@ -1,12 +1,12 @@
 import { Box, Grid } from '@mui/material';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import DebouncedInput from '../../components/DebouncedInput';
 import { StorageEnum } from '../../enums/storage.enum';
 import useTabName from '../../hooks/PagesNameGetter.hook';
+import useStorageValues from '../../hooks/StorageGetter.hook';
 import { DispatchType } from '../../types/DispatchType';
 import { PageType } from '../../types/PageType';
 import { StorageType } from '../../types/Storage.type';
-import { getStorageValues } from '../../utils/utility';
 import ItemCard from './components/ItemCard';
 import TabSelect from './components/SelectTab';
 import SelectType from './components/SelectType';
@@ -87,7 +87,7 @@ const ItemView: React.FC = () => {
     searchText: '',
   });
   const windowPagesName: PageType[] = useTabName();
-  const [storageValue, setStorageValue] = useState<StorageType[]>([]);
+  const storageValue = useStorageValues(selectedOption.tabId);
 
   useEffect(() => {
     chrome.tabs.query({ active: true }, (tabs) => {
@@ -97,10 +97,6 @@ const ItemView: React.FC = () => {
       });
     });
   }, []);
-
-  useEffect(() => {
-    getStorageValues(selectedOption.tabId, setStorageValue);
-  }, [selectedOption.tabId]);
 
   const values: StorageType[] = getValues(selectedOption, storageValue);
 
@@ -135,7 +131,6 @@ const ItemView: React.FC = () => {
               storeKey={key}
               tabId={tabId}
               storage={storage}
-              setStorageValue={setStorageValue}
             />
           ))}
         </Box>

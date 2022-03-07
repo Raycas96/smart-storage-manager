@@ -36,9 +36,12 @@ const getStorageLengthValues = (
             res?.length && !Number.isNaN(res[0].result.session)
               ? (res[0]?.result?.session as number)
               : 0;
+          console.log('counter', counter, tabs.length);
 
           counter += 1;
-          if (counter === tabs.length - 1) {
+          if (counter === tabs.length) {
+            console.log('entro counter', counter, tabs.length);
+            console.log('entro');
             setStorageValue(storageLengthValues);
           }
         }
@@ -55,12 +58,12 @@ const useStorageItemCounter = () => {
     });
 
   React.useEffect(() => {
-    window.addEventListener('deleteItem', () =>
-      getStorageLengthValues(setStorageLengthValue));
-
     getStorageLengthValues(setStorageLengthValue);
 
-    return window.removeEventListener('deleteItem', () =>
+    window.addEventListener('refresh', () =>
+      getStorageLengthValues(setStorageLengthValue));
+
+    return window.removeEventListener('refresh', () =>
       getStorageLengthValues(setStorageLengthValue));
   }, []);
 

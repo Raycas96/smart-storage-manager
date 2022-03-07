@@ -5,6 +5,7 @@ import useStorageItemCounter from '../../hooks/StorageItemCounter.hook';
 
 const StorageItemCounter: React.FC<{ type: string }> = ({ type }) => {
   const storageCount = useStorageItemCounter();
+  console.log(storageCount);
   const text = `${
     type === StorageEnum.LOCAL ? 'Local' : 'Session'
   } Storage Total Items: ${

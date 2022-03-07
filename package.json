@@ -55,5 +55,13 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "2.5.0"
-  }
+  },
+  "keywords": [
+    "storage",
+    "session storage",
+    "local storage",
+    "local",
+    "application",
+    "devtools"
+  ]
 }
