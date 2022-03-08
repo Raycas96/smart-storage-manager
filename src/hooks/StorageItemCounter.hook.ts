@@ -36,12 +36,8 @@ const getStorageLengthValues = (
             res?.length && !Number.isNaN(res[0].result.session)
               ? (res[0]?.result?.session as number)
               : 0;
-          console.log('counter', counter, tabs.length);
-
           counter += 1;
           if (counter === tabs.length) {
-            console.log('entro counter', counter, tabs.length);
-            console.log('entro');
             setStorageValue(storageLengthValues);
           }
         }
